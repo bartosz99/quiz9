@@ -10,7 +10,7 @@ const handleStartTest = () => {
 </script>
 
 <template>
-  <div class="container max-w-2xl py-24 sm:py-32 flex items-center justify-center">
+  <div class="container max-w-2xl py-24 sm:py-32 flex flex-col items-center justify-center">
     <Button @click="handleStartTest">Start a test</Button>
   </div>
 </template>

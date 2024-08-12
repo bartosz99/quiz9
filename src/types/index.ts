@@ -1,12 +1,4 @@
-import { Routes } from '@/enums';
+export * from './NavRoutes';
+export * from './faq';
 
-export type NavRoutes = {
-  href: Routes;
-  label: string;
-};
-
-export type Faq = {
-  question: string;
-  answer: string;
-  value: string;
-};
+export * from './QuizStore';
