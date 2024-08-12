@@ -20,7 +20,7 @@ import { ArrowRight } from "lucide-vue-next";
           <span class="mr-2 text-primary">
             <Badge>New</Badge>
           </span>
-          <span> Design is out now! </span>
+          <span> Art category available! </span>
         </Badge>
 
         <div
