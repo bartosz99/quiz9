@@ -5,7 +5,7 @@ import Home from '@/views/Home.vue';
 import Quiz from '@/views/Quiz.vue';
 import Statistics from '@/views/Statistics.vue';
 import Leaderboard from '@/views/Leaderboard.vue';
-import FAQ from '@/views/Leaderboard.vue';
+import FAQ from '@/views/FAQ.vue';
 
 const routes = [
   { path: Routes.HOME, component: Home },
