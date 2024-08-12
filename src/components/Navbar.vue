@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { Routes } from '@/enums/index';
+import { NavRoutes } from '@/types';
 
 import {
   NavigationMenu,
@@ -23,17 +24,12 @@ import { Separator } from '@/components/ui/separator';
 import { ChevronsDown, Menu } from 'lucide-vue-next';
 import GithubIcon from '@/icons/GithubIcon.vue';
 import ToggleTheme from './ToggleTheme.vue';
-
 import { useColorMode } from '@vueuse/core';
+
 const mode = useColorMode();
 mode.value = 'dark';
 
-interface RouteProps {
-  href: string;
-  label: string;
-}
-
-const routeList: RouteProps[] = [
+const routeList: NavRoutes[] = [
   {
     href: Routes.QUIZ,
     label: 'Quiz'
@@ -136,11 +132,7 @@ const isOpen = ref<boolean>(false);
       <ToggleTheme />
 
       <Button as-child size="sm" variant="ghost" aria-label="View on GitHub">
-        <a
-          aria-label="View on GitHub"
-          href="https://github.com/leoMirandaa/shadcn-vue-landing-page.git"
-          target="_blank"
-        >
+        <a aria-label="View on GitHub" href="https://github.com/bartosz99/quiz9" target="_blank">
           <GithubIcon class="size-5" />
         </a>
       </Button>
