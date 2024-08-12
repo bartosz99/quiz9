@@ -11,6 +11,7 @@ export type QuizQuestion = {
 
 export type QuizStoreState = {
   questions: Nullable<QuizQuestion[]>;
+  answers: string[];
   busy: {
     fetchingQuestions: boolean;
   };

@@ -7,6 +7,7 @@ const { toast } = useToast();
 export const useQuizStore = defineStore('quiz', {
   state: (): QuizStoreState => ({
     questions: null,
+    answers: [],
     busy: {
       fetchingQuestions: false
     }
