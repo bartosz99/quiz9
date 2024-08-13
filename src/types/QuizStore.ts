@@ -18,7 +18,9 @@ export type Preferences = {
 export type QuizState = {
   step: QuizSteps;
   question: number;
+  effectiveTime: number;
   timeLeft: number;
+  confettiDisplayed: boolean;
 };
 
 export type QuizStoreState = {

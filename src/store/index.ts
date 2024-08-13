@@ -18,7 +18,9 @@ export const useQuizStore = defineStore('quiz', {
     quizState: {
       step: QuizSteps.BEFORE_QUIZ,
       question: 0,
-      timeLeft: 300
+      effectiveTime: 0,
+      timeLeft: 300,
+      confettiDisplayed: false
     },
     busy: {
       fetchingQuestions: false
@@ -27,6 +29,11 @@ export const useQuizStore = defineStore('quiz', {
 
   getters: {
     stepActiveIndex: (state) => state.quizState.question,
+    timeInMinutes: (state) =>
+      `${Math.floor(state.quizState.timeLeft / 60)}:${
+        state.quizState.timeLeft % 60 < 10 ? '0' : ''
+      }${state.quizState.timeLeft % 60}`,
+
     correctAnswersPercentage: (state) => {
       if (!state.questions) return 0;
       const correctAnswers = state.questions.filter((question, index) =>
@@ -37,7 +44,18 @@ export const useQuizStore = defineStore('quiz', {
       );
       return (correctAnswers.length / state.questions.length) * 100;
     },
-
+    unansweredQuestions: (state) => {
+      if (!state.questions) return 0;
+      return state.questions.filter((question, index) => typeof state.answers[index] !== 'string')
+        .length;
+    },
+    timeMultiplier: (state) => {
+      if (state.quizState.effectiveTime > 180) return 1;
+      return 0.8 + (state.quizState.effectiveTime / 180) * 0.2;
+    },
+    finalScore: () => {
+      return this.correctAnswersPercentage * this.timeMultiplier;
+    },
     fetchURL: (state) => {
       const category =
         state.preferences.category === QuizCategory.ANY
@@ -93,6 +111,16 @@ export const useQuizStore = defineStore('quiz', {
           description: 'Your results have been saved.'
         });
       }
+    },
+    startCountdown() {
+      console.log('start countdown');
+      const interval = setInterval(() => {
+        if (this.quizState.timeLeft > 0) {
+          this.quizState.timeLeft--;
+        } else {
+          clearInterval(interval);
+        }
+      }, 1000);
     }
   },
   persist: true

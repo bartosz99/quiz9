@@ -6,6 +6,16 @@ import { Input } from '@/components/ui/input';
 import { useQuizStore } from '@/store/index';
 
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog';
+
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -17,17 +27,17 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const quizStore = useQuizStore();
-const activeIndex = ref(0);
 const isSubmitFormVisible = ref(false);
 
 watchEffect(() => {
-  if (quizStore.questions && activeIndex.value + 1 === quizStore.questions.length) {
+  if (quizStore.questions && quizStore.quizState.question + 1 === quizStore.questions.length) {
     isSubmitFormVisible.value = true;
   }
 });
 
 type Emits = {
   (event: 'quiz-finished'): void;
+  (event: 'quiz-canceled'): void;
 };
 
 defineEmits<Emits>();
@@ -42,7 +52,10 @@ defineEmits<Emits>();
       :key="index"
       :id="'step-' + index"
     >
-      <Button :disabled="quizStore.stepActiveIndex === 0" @click="quizStore.quizState.question--"
+      <Button
+        variant="outline"
+        :disabled="quizStore.stepActiveIndex === 0"
+        @click="quizStore.quizState.question--"
         >Prev</Button
       >
       <Card class="w-[600px] h-[300px]">
@@ -88,6 +101,7 @@ defineEmits<Emits>();
         </CardContent>
       </Card>
       <Button
+        variant="outline"
         :disabled="
           quizStore.questions && quizStore.stepActiveIndex === quizStore.questions.length - 1
         "
@@ -95,6 +109,53 @@ defineEmits<Emits>();
         >Next</Button
       >
     </div>
-    <Button v-if="isSubmitFormVisible" @click="$emit('quiz-finished')">Finish Quiz</Button>
+    <div class="flex gap-8">
+      <Dialog>
+        <DialogTrigger as-child>
+          <Button variant="outline"> Cancel </Button>
+        </DialogTrigger>
+        <DialogContent class="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Cancel quiz</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to cancel the quiz? The entered results will not be saved and
+              evaluated
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter>
+            <Button @click="$emit('quiz-canceled')" type="submit"> Yes, cancel quiz </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Button v-if="!quizStore.unansweredQuestions" @click="$emit('quiz-finished')"
+        >Finish Quiz</Button
+      >
+      <Dialog v-else>
+        <DialogTrigger as-child>
+          <Button> Submit answers </Button>
+        </DialogTrigger>
+        <DialogContent class="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Cancel quiz</DialogTitle>
+            <DialogDescription> Are you sure you want to submit the quiz? </DialogDescription>
+          </DialogHeader>
+          <div>
+            <p>
+              You have
+              <span
+                class="text-transparent bg-gradient-to-r from-[#D247BF] text-xl to-primary bg-clip-text"
+                >{{ quizStore.unansweredQuestions }}</span
+              >
+              unanswered questions
+            </p>
+          </div>
+
+          <DialogFooter>
+            <Button @click="$emit('quiz-finished')">Finish Quiz</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   </div>
 </template>

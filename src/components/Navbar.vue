@@ -75,7 +75,7 @@ const isOpen = ref<boolean>(false);
         class="absolute ml-28"
         variant="outline"
       >
-        Time left: {{ quizStore.quizState.timeLeft }}
+        Time left: {{ quizStore.timeInMinutes }}
       </Badge>
     </div>
 

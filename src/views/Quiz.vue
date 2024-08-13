@@ -8,6 +8,7 @@ import QuizBefore from '@/components/QuizBefore.vue';
 import QuizInProgress from '@/components/QuizInProgress.vue';
 import QuizAfter from '@/components/QuizAfter.vue';
 
+const INITAL_TIME_FOR_QUIZ = 300;
 const quizStore = useQuizStore();
 const activeIndex = ref(0);
 const isSubmitFormVisible = ref(false);
@@ -19,15 +20,19 @@ watchEffect(() => {
 });
 const handleQuizStart = async () => {
   await quizStore.getQuiz();
+  quizStore.quizState.timeLeft = INITAL_TIME_FOR_QUIZ;
+  quizStore.startCountdown();
   quizStore.quizState.step = QuizSteps.IN_PROGRESS;
 };
 
 const handleFinishQuiz = () => {
   quizStore.saveResults();
+  quizStore.quizState.effectiveTime = quizStore.quizState.timeLeft;
   quizStore.quizState.step = QuizSteps.AFTER_QUIZ;
 };
 
 const handleStartNewQuiz = () => {
+  console.log('handle start new quiz');
   quizStore.$reset();
   quizStore.quizState.step = QuizSteps.BEFORE_QUIZ;
 };
@@ -44,6 +49,7 @@ const handleStartNewQuiz = () => {
     <QuizInProgress
       v-else-if="quizStore.quizState.step === QuizSteps.IN_PROGRESS"
       @quiz-finished="handleFinishQuiz"
+      @quiz-canceled="handleStartNewQuiz"
     />
     <QuizAfter
       v-else-if="(quizStore.quizState.step = QuizSteps.AFTER_QUIZ)"
