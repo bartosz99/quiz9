@@ -89,12 +89,15 @@ defineEmits<Emits>();
           <CardContent class="flex flex-col justify-between">
             <div class="min-h-32">
               <CardDescription class="mb-4 text-lg">{{ question.question }}</CardDescription>
-              <CardDescription class="">Incorrect answers:</CardDescription>
+              <div>
+                <CardDescription class="">Incorrect answers:</CardDescription>
 
-              <div class="flex">
-                <CardDescription v-for="(answer, index) in question.incorrect_answers">
-                  {{ answer }}{{ index === question.incorrect_answers.length - 1 ? '' : ',&nbsp;' }}
-                </CardDescription>
+                <div v-if="question.type === 'multiple'">
+                  <CardDescription v-for="(answer, index) in question.incorrect_answers">
+                    {{ answer
+                    }}{{ index === question.incorrect_answers.length - 1 ? '' : ',&nbsp;' }}
+                  </CardDescription>
+                </div>
               </div>
             </div>
 

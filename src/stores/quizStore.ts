@@ -78,7 +78,6 @@ export const useQuizStore = defineStore('quiz', {
         });
       }
       if (data.value) {
-        console.log(data.value);
         this.questions = data.value.results.map((question: any) => {
           return {
             ...question,
@@ -90,7 +89,6 @@ export const useQuizStore = defineStore('quiz', {
             type: atob(question.type)
           };
         });
-        console.log(this.questions);
       }
     },
     async saveResults() {
@@ -125,7 +123,6 @@ export const useQuizStore = defineStore('quiz', {
         if (this.quizState.timeLeft > 0) {
           this.quizState.timeLeft--;
         } else {
-          console.log('else on endtime');
           this.saveResults();
           this.quizState.effectiveTime = this.quizState.timeLeft;
           this.quizState.step = QuizSteps.AFTER_QUIZ;

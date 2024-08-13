@@ -12,7 +12,7 @@ export const useResultStore = defineStore('results', {
 
   getters: {
     // this is terrible and disgusting part of code with unefficient time complexity
-    // made ASAP, to be rewriten later
+    // made ASAP, to be rewriten later using next grupBy property
     resultsForChart: (state) => {
       return [
         {

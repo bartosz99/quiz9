@@ -32,7 +32,6 @@ const handleFinishQuiz = () => {
 };
 
 const handleStartNewQuiz = () => {
-  console.log('handle start new quiz');
   quizStore.$reset();
   quizStore.quizState.step = QuizSteps.BEFORE_QUIZ;
 };

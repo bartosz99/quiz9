@@ -19,7 +19,6 @@ const isResultGoingToBeDisplayed = ref(false);
 const isResultDisplayed = ref(false);
 const areButtonsDisplayed = ref(false);
 
-console.log('quizStore.quizState.confettiDisplayed', quizStore.quizState.confettiDisplayed);
 if (!quizStore.quizState.confettiDisplayed) {
   jsConfetti.addConfetti();
 }
