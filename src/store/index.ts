@@ -21,6 +21,17 @@ export const useQuizStore = defineStore('quiz', {
   }),
 
   getters: {
+    correctAnswersPercentage: (state) => {
+      if (!state.questions) return 0;
+      const correctAnswers = state.questions.filter((question, index) =>
+        typeof state.answers[index] !== 'string'
+          ? false
+          : question.correct_answer.toLocaleLowerCase().replace(/^\s+|\s+$/gm, '') ===
+            state.answers[index].toLocaleLowerCase().replace(/^\s+|\s+$/gm, '')
+      );
+      return (correctAnswers.length / state.questions.length) * 100;
+    },
+
     fetchURL: (state) => {
       const category =
         state.preferences.category === QuizCategory.ANY

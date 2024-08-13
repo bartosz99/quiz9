@@ -34,7 +34,12 @@ watchEffect(() => {
     class="container min-w-xl max-w-2xl py-24 sm:py-32 flex flex-col items-center justify-center"
   >
     <div class="flex flex-col gap-8 flex-grow min-w-full" v-if="!quizStore.questions">
-      <Button @click="quizStore.getQuiz">Start a test</Button>
+      <Button :disabled="!quizStore.nickname" @click="quizStore.getQuiz">Start a test</Button>
+      <div>
+        <Label for="nickname">Nickname</Label>
+        <Input id="nickname" v-model="quizStore.nickname as string" />
+      </div>
+
       <div>
         <Label for="email">Answer</Label>
         <Select v-model="quizStore.preferences.category">
