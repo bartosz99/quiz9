@@ -20,6 +20,9 @@ export const useQuizStore = defineStore('quiz', {
       question: 0,
       effectiveTime: 0,
       timeLeft: 300,
+      resultBeforeDisplayed: false,
+      resultDisplayed: false,
+      buttonsDisplayed: false,
       confettiDisplayed: false
     },
     busy: {

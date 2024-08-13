@@ -42,8 +42,8 @@ resultStore.getResults();
             </TableCell>
             <TableCell>{{ result.difficulty }}</TableCell>
             <TableCell class="text-right font-medium">
-              {{ moment(result.created_at).fromNow() }}</TableCell
-            >
+              {{ moment(result.created_at).fromNow() }}
+            </TableCell>
           </TableRow>
         </TableBody>
       </Table>

@@ -8,7 +8,7 @@ import QuizBefore from '@/components/QuizBefore.vue';
 import QuizInProgress from '@/components/QuizInProgress.vue';
 import QuizAfter from '@/components/QuizAfter.vue';
 
-const INITAL_TIME_FOR_QUIZ = 10;
+const INITAL_TIME_FOR_QUIZ = 300;
 const quizStore = useQuizStore();
 const activeIndex = ref(0);
 const isSubmitFormVisible = ref(false);
