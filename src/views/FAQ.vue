@@ -16,7 +16,8 @@ const FAQList: Faq[] = [
   },
   {
     question: 'Are my data safe?',
-    answer: 'Yes, your date stays in your browser history.',
+    answer:
+      'This quiz data are publicly available for everyone. Use nickname which do not reveal your identity.',
     value: 'item-2'
   },
   {
@@ -46,8 +47,10 @@ const FAQList: Faq[] = [
 
     <h3 class="font-medium mt-4 text-center">
       Still have questions?
-      <a href="#" class="text-muted-foreground">
-        <a href="#" class="underline">Contact us</a>
+      <a target="_blank" href="https://www.linkedin.com/in/b-ciesla/" class="text-muted-foreground">
+        <a target="_blank" href="https://www.linkedin.com/in/b-ciesla/" class="underline"
+          >Contact us</a
+        >
       </a>
     </h3>
   </section>

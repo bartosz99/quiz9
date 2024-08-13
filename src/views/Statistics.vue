@@ -1,35 +1,60 @@
 <script setup lang="ts">
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+import { AreaChart } from '@/components/ui/chart-area';
 
-import { Button } from '@/components/ui/button';
-import { RouterLink } from 'vue-router';
+import { useResultStore } from '@/stores/index';
+
+const resultStore = useResultStore();
+
+resultStore.getResults();
+
+const data = [
+  {
+    name: '10%',
+    total: Math.floor(Math.random() * 2000) + 500,
+    predicted: Math.floor(Math.random() * 2000) + 500
+  },
+  {
+    name: '20%',
+    total: Math.floor(Math.random() * 2000) + 500,
+    predicted: Math.floor(Math.random() * 2000) + 500
+  },
+  {
+    name: '30%',
+    total: Math.floor(Math.random() * 2000) + 500,
+    predicted: Math.floor(Math.random() * 2000) + 500
+  },
+  {
+    name: '40%',
+    total: Math.floor(Math.random() * 2000) + 500,
+    predicted: Math.floor(Math.random() * 2000) + 500
+  },
+  {
+    name: '50%',
+    total: Math.floor(Math.random() * 2000) + 500,
+    predicted: Math.floor(Math.random() * 2000) + 500
+  },
+  {
+    name: '60%',
+    total: Math.floor(Math.random() * 2000) + 500,
+    predicted: Math.floor(Math.random() * 2000) + 500
+  },
+  {
+    name: '70%',
+    total: Math.floor(Math.random() * 2000) + 500,
+    predicted: Math.floor(Math.random() * 2000) + 500
+  }
+];
 </script>
 
 <template>
-  <section id="faq" class="container max-w-xl py-24 sm:py-32">
-    <Card class="">
-      <CardHeader>
-        <CardTitle>Statistics coming soon...</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription>Work in progress...</CardDescription>
-        <CardDescription>This section is still under the development.</CardDescription>
-      </CardContent>
-      <CardFooter class="flex justify-between px-6 pb-6">
-        <RouterLink to="/home" class="text-muted-foreground">
-          <Button variant="outline"> Go to Homepage </Button>
-        </RouterLink>
-        <RouterLink to="/quiz" class="text-muted-foreground">
-          <Button> Take a quiz </Button>
-        </RouterLink>
-      </CardFooter>
-    </Card>
-  </section>
+  <div class="flex items-center justify-center mt-16">
+    <div class="max-w-5xl w-full">
+      <h3>Results by difficulty</h3>
+      <AreaChart
+        :data="resultStore.resultsForChart"
+        index="name"
+        :categories="['any', 'easy', 'medium', 'hard']"
+      />
+    </div>
+  </div>
 </template>

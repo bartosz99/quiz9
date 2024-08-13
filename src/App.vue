@@ -2,6 +2,8 @@
 import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue';
 import Toaster from '@/components/ui/toast/Toaster.vue';
+import { useColorMode } from '@vueuse/core';
+const mode = useColorMode();
 </script>
 
 <template>
