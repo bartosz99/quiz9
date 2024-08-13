@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 
-import { useQuizStore } from '@/store/index';
+import { useQuizStore } from '@/stores/index';
 
 import { QuizSteps } from '@/enums/index';
 import QuizBefore from '@/components/QuizBefore.vue';

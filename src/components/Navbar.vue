@@ -26,7 +26,7 @@ import { ChevronsDown, Menu } from 'lucide-vue-next';
 import GithubIcon from '@/icons/GithubIcon.vue';
 import ToggleTheme from './ToggleTheme.vue';
 import { useColorMode } from '@vueuse/core';
-import { useQuizStore } from '@/store/index';
+import { useQuizStore } from '@/stores/index';
 
 const mode = useColorMode();
 const quizStore = useQuizStore();

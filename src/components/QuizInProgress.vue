@@ -3,7 +3,7 @@ import { ref, watchEffect } from 'vue';
 import Button from '@/components/ui/button/Button.vue';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { useQuizStore } from '@/store/index';
+import { useQuizStore } from '@/stores/index';
 
 import {
   Dialog,

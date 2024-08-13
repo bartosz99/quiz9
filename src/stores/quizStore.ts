@@ -53,9 +53,6 @@ export const useQuizStore = defineStore('quiz', {
       if (state.quizState.effectiveTime > 180) return 1;
       return 0.8 + (state.quizState.effectiveTime / 180) * 0.2;
     },
-    finalScore: () => {
-      return this.correctAnswersPercentage * this.timeMultiplier;
-    },
     fetchURL: (state) => {
       const category =
         state.preferences.category === QuizCategory.ANY

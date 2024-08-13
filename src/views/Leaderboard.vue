@@ -1,35 +1,49 @@
 <script setup lang="ts">
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card';
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow
+} from '@/components/ui/table';
 
-import { Button } from '@/components/ui/button';
-import { RouterLink } from 'vue-router';
+import { useResultStore } from '@/stores/index';
+
+const resultStore = useResultStore();
+
+resultStore.getResults();
 </script>
 
 <template>
-  <section id="faq" class="container max-w-xl py-24 sm:py-32">
-    <Card class="">
-      <CardHeader>
-        <CardTitle>Leaderboard coming soon...</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription>Work in progress...</CardDescription>
-        <CardDescription>This section is still under the development.</CardDescription>
-      </CardContent>
-      <CardFooter class="flex justify-between px-6 pb-6">
-        <RouterLink to="/home" class="text-muted-foreground">
-          <Button variant="outline"> Go to Homepage </Button>
-        </RouterLink>
-        <RouterLink to="/quiz" class="text-muted-foreground">
-          <Button> Take a quiz </Button>
-        </RouterLink>
-      </CardFooter>
-    </Card>
-  </section>
+  <div class="flex flex-grow items-center justify-center mt-16">
+    <div class="min-w-2xl flex-growmax-w-4xl">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead class="w-[100px]"> Position </TableHead>
+            <TableHead>Points</TableHead>
+            <TableHead>Nickname</TableHead>
+            <TableHead>Difficulty</TableHead>
+            <TableHead class="text-right"> Amount </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow v-for="(result, index) in resultStore.results" :key="result.id">
+            <TableCell class="font-medium">
+              {{ index + 1 }}
+            </TableCell>
+            <TableCell class="font-medium">
+              {{ result.result }}
+            </TableCell>
+            <TableCell class="font-medium">
+              {{ result.nickname }}
+            </TableCell>
+            <TableCell>{{ result.difficulty }}</TableCell>
+            <TableCell class="text-right font-medium">{{ result.created_at }}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
+  </div>
 </template>

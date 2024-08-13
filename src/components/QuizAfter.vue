@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import JSConfetti from 'js-confetti';
-import { useQuizStore } from '@/store/index';
+import { useQuizStore } from '@/stores/index';
 import { Button } from '@/components/ui/button';
 
 type Emits = {

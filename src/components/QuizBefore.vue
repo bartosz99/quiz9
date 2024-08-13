@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from '@/components/ui/button/Button.vue';
 import { Input } from '@/components/ui/input';
-import { useQuizStore } from '@/store/index';
+import { useQuizStore } from '@/stores/index';
 import { QuizCategories } from '@/constants/index';
 import { QuizDifficulty } from '@/enums/index';
 
