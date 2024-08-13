@@ -22,10 +22,6 @@ const quizStore = useQuizStore();
 const activeIndex = ref(0);
 const isSubmitFormVisible = ref(false);
 
-const handleStartTest = () => {
-  quizStore.getQuiz();
-};
-
 watchEffect(() => {
   if (quizStore.questions && activeIndex.value + 1 === quizStore.questions.length) {
     isSubmitFormVisible.value = true;
@@ -38,7 +34,7 @@ watchEffect(() => {
     class="container min-w-xl max-w-2xl py-24 sm:py-32 flex flex-col items-center justify-center"
   >
     <div class="flex flex-col gap-8 flex-grow min-w-full" v-if="!quizStore.questions">
-      <Button @click="handleStartTest">Start a test</Button>
+      <Button @click="quizStore.getQuiz">Start a test</Button>
       <div>
         <Label for="email">Answer</Label>
         <Select v-model="quizStore.preferences.category">

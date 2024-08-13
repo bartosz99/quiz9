@@ -3,6 +3,7 @@ import { useFetch } from '@vueuse/core';
 import { QuizStoreState } from '@/types';
 import { QuizCategory, QuizDifficulty } from '@/enums';
 import { useToast } from '@/components/ui/toast/use-toast';
+import { supabase } from '@/lib/supabaseClient';
 const { toast } = useToast();
 
 export const useQuizStore = defineStore('quiz', {
@@ -47,6 +48,30 @@ export const useQuizStore = defineStore('quiz', {
       if (data.value) {
         console.log(data.value);
         this.questions = data.value.results;
+      }
+    },
+    async saveResults() {
+      const { data, error } = await supabase.from('quiz_results').insert([
+        {
+          nickname: 'Bob234',
+          result: 40,
+          number_of_questions: 10,
+          difficulty: 'easy',
+          category: ''
+        }
+      ]);
+      if (error) {
+        toast({
+          title: 'Uh oh! Something went wrong.',
+          description: 'There was a problem saving your results.',
+          variant: 'destructive'
+        });
+      }
+      if (data) {
+        toast({
+          title: 'Success!',
+          description: 'Your results have been saved.'
+        });
       }
     }
   }
