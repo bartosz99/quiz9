@@ -19,17 +19,17 @@ watchEffect(() => {
 });
 const handleQuizStart = async () => {
   await quizStore.getQuiz();
-  quizStore.step = QuizSteps.IN_PROGRESS;
+  quizStore.quizState.step = QuizSteps.IN_PROGRESS;
 };
 
 const handleFinishQuiz = () => {
   quizStore.saveResults();
-  quizStore.step = QuizSteps.AFTER_QUIZ;
+  quizStore.quizState.step = QuizSteps.AFTER_QUIZ;
 };
 
 const handleStartNewQuiz = () => {
   quizStore.$reset();
-  quizStore.step = QuizSteps.BEFORE_QUIZ;
+  quizStore.quizState.step = QuizSteps.BEFORE_QUIZ;
 };
 </script>
 
@@ -37,13 +37,16 @@ const handleStartNewQuiz = () => {
   <div
     class="container min-w-xl max-w-2xl py-24 sm:py-32 flex flex-col items-center justify-center"
   >
-    <QuizBefore v-if="quizStore.step === QuizSteps.BEFORE_QUIZ" @quiz-started="handleQuizStart" />
+    <QuizBefore
+      v-if="quizStore.quizState.step === QuizSteps.BEFORE_QUIZ"
+      @quiz-started="handleQuizStart"
+    />
     <QuizInProgress
-      v-else-if="quizStore.step === QuizSteps.IN_PROGRESS"
+      v-else-if="quizStore.quizState.step === QuizSteps.IN_PROGRESS"
       @quiz-finished="handleFinishQuiz"
     />
     <QuizAfter
-      v-else-if="(quizStore.step = QuizSteps.AFTER_QUIZ)"
+      v-else-if="(quizStore.quizState.step = QuizSteps.AFTER_QUIZ)"
       @start-new-quiz="handleStartNewQuiz"
     />
   </div>

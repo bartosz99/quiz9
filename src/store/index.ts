@@ -17,9 +17,9 @@ export const useQuizStore = defineStore('quiz', {
     },
     quizState: {
       step: QuizSteps.BEFORE_QUIZ,
-      question: 0
+      question: 0,
+      timeLeft: 300
     },
-    step: QuizSteps.BEFORE_QUIZ,
     busy: {
       fetchingQuestions: false
     }

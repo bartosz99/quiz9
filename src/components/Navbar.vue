@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { Routes } from '@/enums/index';
+import { QuizSteps, Routes } from '@/enums/index';
 import { NavRoutes } from '@/types';
 
+import { Badge } from '@/components/ui/badge';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -25,8 +26,11 @@ import { ChevronsDown, Menu } from 'lucide-vue-next';
 import GithubIcon from '@/icons/GithubIcon.vue';
 import ToggleTheme from './ToggleTheme.vue';
 import { useColorMode } from '@vueuse/core';
+import { useQuizStore } from '@/store/index';
 
 const mode = useColorMode();
+const quizStore = useQuizStore();
+
 mode.value = 'dark';
 
 const routeList: NavRoutes[] = [
@@ -59,12 +63,22 @@ const isOpen = ref<boolean>(false);
       'w-[90%] md:w-[70%] lg:w-[75%] lg:max-w-screen-xl top-5 mx-auto sticky border z-40 rounded-2xl flex justify-between items-center p-2 bg-card shadow-md': true
     }"
   >
-    <a href="/" class="font-bold text-lg flex items-center">
-      <ChevronsDown
-        class="bg-gradient-to-tr from-primary via-primary/70 to-primary rounded-lg w-9 h-9 mr-2 border text-white"
-      />
-      Quiz9</a
-    >
+    <div class="flex items-center gap-4">
+      <a href="/" class="font-bold text-lg flex items-center">
+        <ChevronsDown
+          class="bg-gradient-to-tr from-primary via-primary/70 to-primary rounded-lg w-9 h-9 mr-2 border text-white"
+        />
+        Quiz9</a
+      >
+      <Badge
+        v-if="quizStore.quizState.step === QuizSteps.IN_PROGRESS"
+        class="absolute ml-28"
+        variant="outline"
+      >
+        Time left: {{ quizStore.quizState.timeLeft }}
+      </Badge>
+    </div>
+
     <!-- Mobile -->
     <div class="flex items-center lg:hidden">
       <Sheet v-model:open="isOpen">

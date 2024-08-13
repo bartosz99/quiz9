@@ -18,6 +18,7 @@ export type Preferences = {
 export type QuizState = {
   step: QuizSteps;
   question: number;
+  timeLeft: number;
 };
 
 export type QuizStoreState = {
@@ -26,7 +27,6 @@ export type QuizStoreState = {
   quizState: QuizState;
   answers: string[];
   preferences: Preferences;
-  step: QuizSteps;
   busy: {
     fetchingQuestions: boolean;
   };
