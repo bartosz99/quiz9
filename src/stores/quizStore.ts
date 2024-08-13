@@ -63,7 +63,7 @@ export const useQuizStore = defineStore('quiz', {
         state.preferences.difficulty === QuizDifficulty.ANY
           ? ''
           : `&difficulty=${state.preferences.difficulty}`;
-      return `https://opentdb.com/api.php?amount=10${category}${difficulty}`;
+      return `https://opentdb.com/api.php?amount=10${category}${difficulty}&encode=base64`;
     }
   },
 
@@ -80,7 +80,18 @@ export const useQuizStore = defineStore('quiz', {
       }
       if (data.value) {
         console.log(data.value);
-        this.questions = data.value.results;
+        this.questions = data.value.results.map((question: any) => {
+          return {
+            ...question,
+            category: atob(question.category),
+            correct_answer: atob(question.correct_answer),
+            difficulty: atob(question.difficulty),
+            incorrect_answers: question.incorrect_answers.map((answer: string) => atob(answer)),
+            question: atob(question.question),
+            type: atob(question.type)
+          };
+        });
+        console.log(this.questions);
       }
     },
     async saveResults() {
