@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useFetch } from '@vueuse/core';
 import { QuizStoreState } from '@/types';
-import { QuizCategory, QuizDifficulty } from '@/enums';
+import { QuizCategory, QuizDifficulty, QuizSteps } from '@/enums';
 import { useToast } from '@/components/ui/toast/use-toast';
 import { supabase } from '@/lib/supabaseClient';
 const { toast } = useToast();
@@ -15,12 +15,18 @@ export const useQuizStore = defineStore('quiz', {
       category: QuizCategory.ANY,
       difficulty: QuizDifficulty.ANY
     },
+    quizState: {
+      step: QuizSteps.BEFORE_QUIZ,
+      question: 0
+    },
+    step: QuizSteps.BEFORE_QUIZ,
     busy: {
       fetchingQuestions: false
     }
   }),
 
   getters: {
+    stepActiveIndex: (state) => state.quizState.question,
     correctAnswersPercentage: (state) => {
       if (!state.questions) return 0;
       const correctAnswers = state.questions.filter((question, index) =>
@@ -62,15 +68,18 @@ export const useQuizStore = defineStore('quiz', {
       }
     },
     async saveResults() {
-      const { data, error } = await supabase.from('quiz_results').insert([
-        {
-          nickname: 'Bob234',
-          result: 40,
-          number_of_questions: 10,
-          difficulty: 'easy',
-          category: ''
-        }
-      ]);
+      const { data, error } = await supabase
+        .from('quiz_results')
+        .insert([
+          {
+            nickname: this.nickname,
+            result: this.correctAnswersPercentage,
+            number_of_questions: this.questions ? this.questions.length : 0,
+            difficulty: this.preferences.difficulty,
+            category: this.preferences.category
+          }
+        ])
+        .select();
       if (error) {
         toast({
           title: 'Uh oh! Something went wrong.',
@@ -85,5 +94,6 @@ export const useQuizStore = defineStore('quiz', {
         });
       }
     }
-  }
+  },
+  persist: true
 });

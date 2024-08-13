@@ -1,5 +1,5 @@
 import { Nullable } from './Nullable';
-import { QuizCategory, QuizDifficulty } from '@/enums';
+import { QuizCategory, QuizDifficulty, QuizSteps } from '@/enums';
 
 export type QuizQuestion = {
   category: string;
@@ -15,11 +15,18 @@ export type Preferences = {
   difficulty: QuizDifficulty;
 };
 
+export type QuizState = {
+  step: QuizSteps;
+  question: number;
+};
+
 export type QuizStoreState = {
   nickname: Nullable<string>;
   questions: Nullable<QuizQuestion[]>;
+  quizState: QuizState;
   answers: string[];
   preferences: Preferences;
+  step: QuizSteps;
   busy: {
     fetchingQuestions: boolean;
   };

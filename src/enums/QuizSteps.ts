@@ -1,0 +1,5 @@
+export enum QuizSteps {
+  BEFORE_QUIZ = 'BEFORE_QUIZ',
+  IN_PROGRESS = 'IN_PROGRESS',
+  AFTER_QUIZ = 'AFTER_QUIZ'
+}
