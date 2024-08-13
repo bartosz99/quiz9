@@ -26,7 +26,7 @@ resultStore.getResults();
             <TableHead>Points</TableHead>
             <TableHead>Nickname</TableHead>
             <TableHead>Difficulty</TableHead>
-            <TableHead class="text-right"> Amount </TableHead>
+            <TableHead class="text-right"> Date </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
