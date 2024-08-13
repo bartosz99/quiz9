@@ -4,6 +4,8 @@ import Footer from './components/Footer.vue';
 import Toaster from '@/components/ui/toast/Toaster.vue';
 import { useColorMode } from '@vueuse/core';
 const mode = useColorMode();
+//just to avoid pipeline error ASAP
+console.log('🚀 ~ mode:', mode);
 </script>
 
 <template>

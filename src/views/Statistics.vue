@@ -6,44 +6,6 @@ import { useResultStore } from '@/stores/index';
 const resultStore = useResultStore();
 
 resultStore.getResults();
-
-const data = [
-  {
-    name: '10%',
-    total: Math.floor(Math.random() * 2000) + 500,
-    predicted: Math.floor(Math.random() * 2000) + 500
-  },
-  {
-    name: '20%',
-    total: Math.floor(Math.random() * 2000) + 500,
-    predicted: Math.floor(Math.random() * 2000) + 500
-  },
-  {
-    name: '30%',
-    total: Math.floor(Math.random() * 2000) + 500,
-    predicted: Math.floor(Math.random() * 2000) + 500
-  },
-  {
-    name: '40%',
-    total: Math.floor(Math.random() * 2000) + 500,
-    predicted: Math.floor(Math.random() * 2000) + 500
-  },
-  {
-    name: '50%',
-    total: Math.floor(Math.random() * 2000) + 500,
-    predicted: Math.floor(Math.random() * 2000) + 500
-  },
-  {
-    name: '60%',
-    total: Math.floor(Math.random() * 2000) + 500,
-    predicted: Math.floor(Math.random() * 2000) + 500
-  },
-  {
-    name: '70%',
-    total: Math.floor(Math.random() * 2000) + 500,
-    predicted: Math.floor(Math.random() * 2000) + 500
-  }
-];
 </script>
 
 <template>
