@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import moment from 'moment';
 import {
   Table,
   TableBody,
@@ -40,7 +41,9 @@ resultStore.getResults();
               {{ result.nickname }}
             </TableCell>
             <TableCell>{{ result.difficulty }}</TableCell>
-            <TableCell class="text-right font-medium">{{ result.created_at }}</TableCell>
+            <TableCell class="text-right font-medium">
+              {{ moment(result.created_at).fromNow() }}</TableCell
+            >
           </TableRow>
         </TableBody>
       </Table>

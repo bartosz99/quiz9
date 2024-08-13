@@ -121,11 +121,14 @@ export const useQuizStore = defineStore('quiz', {
       }
     },
     startCountdown() {
-      console.log('start countdown');
       const interval = setInterval(() => {
         if (this.quizState.timeLeft > 0) {
           this.quizState.timeLeft--;
         } else {
+          console.log('else on endtime');
+          this.saveResults();
+          this.quizState.effectiveTime = this.quizState.timeLeft;
+          this.quizState.step = QuizSteps.AFTER_QUIZ;
           clearInterval(interval);
         }
       }, 1000);
