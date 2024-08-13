@@ -1,11 +1,11 @@
 {
-  "name": "shadcn-vue-landing-page",
-  "description": "Shadcn/Vue landing page template using Vue, Shadcn/Vue + TypeScript + Tailwind CSS.",
+  "name": "quiz9",
+  "description": "quiz9 - recruitment task made vy Vue, Typescript, Supabase, TailwindCSS, Vite and Shadcn",
   "version": "0.1.1",
   "author": {
-    "name": "Leopoldo Miranda",
-    "email": "leomirandadev@gmail.com",
-    "url": "https://github.com/leomirandaa"
+    "name": "Bartosz Cieśla",
+    "email": "bartosz.c96@gmail.com",
+    "url": "https://github.com/bartosz99"
   },
   "keywords": [
     "vue",
@@ -13,8 +13,7 @@
     "shadcn",
     "shadcn/vue",
     "tailwind",
-    "landing-page",
-    "template",
+    "supabase",
     "responsive-design"
   ],
   "type": "module",

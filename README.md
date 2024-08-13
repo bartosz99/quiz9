@@ -1,41 +1,20 @@
 # Quiz9 - Test your knowledge
 
-![Alt text](./public/demo-img.jpg)
-Live demo is now available: <a href="https://shadcn-vue-landing-page.vercel.app" target="_blank">Live Demo</a>
+Live demo is now available: <a href="https://quiz9.vercel.app/" target="_blank">Live Demo</a>
 
-## Sections
-
-- [x] Navbar
-- [x] Sidebar(mobile)
-- [x] Hero
-- [x] Sponsors
-- [x] Benefits
-- [x] Features
-- [x] Testimonials
-- [x] Pricing
-- [x] Frequently Asked Questions(FAQ)
-- [x] Team
-- [x] Footer
-- [ ] ... More Sections Coming Soon
-
-## Features
-
-- [x] Fully Responsive Design
-- [x] User Friendly Navigation
-- [x] Dark Mode
 
 ## How to install
 
 1. Clone this repositoy:
 
 ```bash
-git clone https://github.com/leoMirandaa/shadcn-vue-landing-page.git
+git clone https://github.com/bartosz99/quiz9.git
 ```
 
 2. Go into project
 
 ```bash
-cd shadcn-vue-landing-page
+cd quiz9
 ```
 
 3. Install dependencies
