@@ -3,6 +3,7 @@ import { ref, watchEffect } from 'vue';
 import Button from '@/components/ui/button/Button.vue';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Progress } from '@/components/ui/progress';
 import { useQuizStore } from '@/stores/index';
 
 import {
@@ -26,6 +27,7 @@ import {
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
+const progress = ref(13);
 const quizStore = useQuizStore();
 const isSubmitFormVisible = ref(false);
 
@@ -58,48 +60,54 @@ defineEmits<Emits>();
         @click="quizStore.quizState.question--"
         >Prev</Button
       >
-      <Card class="w-[600px] h-[300px]">
-        <CardHeader class="flex flex-row justify-between">
-          <div class="flex gap-4">
-            <CardTitle>Question {{ quizStore.stepActiveIndex + 1 }}</CardTitle>
-            <Badge variant="outline">{{ question.category }}</Badge>
-          </div>
+      <div>
+        <div>
+          <p>{{ quizStore.stepActiveIndexPercentage }} %</p>
+          <Progress v-model="quizStore.stepActiveIndexPercentage" class="w-full mb-4" />
+        </div>
+        <Card class="w-[600px] h-[300px]">
+          <CardHeader class="flex flex-row justify-between">
+            <div class="flex gap-4">
+              <CardTitle>Question {{ quizStore.stepActiveIndex + 1 }}</CardTitle>
+              <Badge variant="outline">{{ question.category }}</Badge>
+            </div>
 
-          <Badge
-            :class="{
-              'text-green-500 bg-green-90 dark:bg-green-950 border-green-900':
-                question.difficulty === 'easy',
-              'text-yellow-500 bg-yellow-90 dark:bg-yellow-950 border-yellow-900':
-                question.difficulty === 'medium',
-              'text-red-500 bg-red-90 dark:bg-red-950 border-red-900':
-                question.difficulty === 'hard'
-            }"
-            variant="outline"
-            >{{ question.difficulty }}</Badge
-          >
-        </CardHeader>
-        <CardContent class="flex flex-col justify-between">
-          <CardDescription class="min-h-32">{{ question.question }}</CardDescription>
+            <Badge
+              :class="{
+                'text-green-500 bg-green-90 dark:bg-green-950 border-green-900':
+                  question.difficulty === 'easy',
+                'text-yellow-500 bg-yellow-90 dark:bg-yellow-950 border-yellow-900':
+                  question.difficulty === 'medium',
+                'text-red-500 bg-red-90 dark:bg-red-950 border-red-900':
+                  question.difficulty === 'hard'
+              }"
+              variant="outline"
+              >{{ question.difficulty }}</Badge
+            >
+          </CardHeader>
+          <CardContent class="flex flex-col justify-between">
+            <CardDescription class="min-h-32">{{ question.question }}</CardDescription>
 
-          <Label for="email">Answer</Label>
-          <Input
-            v-if="question.type === 'multiple'"
-            id="answer"
-            v-model="quizStore.answers[quizStore.stepActiveIndex]"
-          />
-          <Select v-else v-model="quizStore.answers[quizStore.stepActiveIndex]">
-            <SelectTrigger class="w-[180px]">
-              <SelectValue placeholder="Select an answer" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="true"> True </SelectItem>
-                <SelectItem value="false"> False </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </CardContent>
-      </Card>
+            <Label for="email">Answer</Label>
+            <Input
+              v-if="question.type === 'multiple'"
+              id="answer"
+              v-model="quizStore.answers[quizStore.stepActiveIndex]"
+            />
+            <Select v-else v-model="quizStore.answers[quizStore.stepActiveIndex]">
+              <SelectTrigger class="w-[180px]">
+                <SelectValue placeholder="Select an answer" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="true"> True </SelectItem>
+                  <SelectItem value="false"> False </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </CardContent>
+        </Card>
+      </div>
       <Button
         variant="outline"
         :disabled="

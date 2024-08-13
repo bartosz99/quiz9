@@ -29,6 +29,7 @@ export const useQuizStore = defineStore('quiz', {
 
   getters: {
     stepActiveIndex: (state) => state.quizState.question,
+    stepActiveIndexPercentage: (state) => (state.quizState.question / 10) * 100,
     timeInMinutes: (state) =>
       `${Math.floor(state.quizState.timeLeft / 60)}:${
         state.quizState.timeLeft % 60 < 10 ? '0' : ''
