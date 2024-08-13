@@ -4,6 +4,8 @@ import Button from '@/components/ui/button/Button.vue';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useQuizStore } from '@/store/index';
+import { QuizCategories } from '@/constants/index';
+import { QuizDifficulty } from '@/enums/index';
 
 import {
   Select,
@@ -32,9 +34,39 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="container max-w-2xl py-24 sm:py-32 flex flex-col items-center justify-center">
-    <div v-if="!quizStore.questions">
+  <div
+    class="container min-w-xl max-w-2xl py-24 sm:py-32 flex flex-col items-center justify-center"
+  >
+    <div class="flex flex-col gap-8 flex-grow min-w-full" v-if="!quizStore.questions">
       <Button @click="handleStartTest">Start a test</Button>
+      <div>
+        <Label for="email">Answer</Label>
+        <Select v-model="quizStore.preferences.category">
+          <SelectTrigger class="">
+            <SelectValue placeholder="Select an answer" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup v-for="category in QuizCategories">
+              <SelectItem :value="category.value">{{ category.label }}</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      <div>
+        <Label for="email">Difficulty</Label>
+        <Select v-model="quizStore.preferences.difficulty">
+          <SelectTrigger class="">
+            <SelectValue placeholder="Select an answer" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem v-for="difficulty in QuizDifficulty" :value="difficulty">
+                {{ difficulty }}
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
     </div>
 
     <div class="flex flex-col items-center gap-8" v-else="quizStore.questions">
