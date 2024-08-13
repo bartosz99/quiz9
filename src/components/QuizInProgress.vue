@@ -27,7 +27,6 @@ import {
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
-const progress = ref(13);
 const quizStore = useQuizStore();
 const isSubmitFormVisible = ref(false);
 
@@ -46,28 +45,29 @@ defineEmits<Emits>();
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-8">
+  <div class="w-full mr-16 ml-16 flex flex-col items-center gap-8">
     <div
       v-for="(question, index) in quizStore.questions"
       v-show="index === quizStore.stepActiveIndex"
-      class="flex justify-center items-center gap-4"
+      class="w-full flex justify-center items-center gap-4"
       :key="index"
       :id="'step-' + index"
     >
       <Button
+        class="hidden md:block"
         variant="outline"
         :disabled="quizStore.stepActiveIndex === 0"
         @click="quizStore.quizState.question--"
         >Prev</Button
       >
-      <div>
+      <div class="w-full">
         <div>
           <p>{{ quizStore.stepActiveIndexPercentage }} %</p>
           <Progress v-model="quizStore.stepActiveIndexPercentage" class="w-full mb-4" />
         </div>
-        <Card class="w-[600px] h-[300px]">
-          <CardHeader class="flex flex-row justify-between">
-            <div class="flex gap-4">
+        <Card class="w-full md:w-[600px] md:h-[300px]">
+          <CardHeader class="flex flex-col md:flex-row justify-between">
+            <div class="flex flex-col md:flex-row gap-4">
               <CardTitle>Question {{ quizStore.stepActiveIndex + 1 }}</CardTitle>
               <Badge variant="outline">{{ question.category }}</Badge>
             </div>
@@ -108,6 +108,24 @@ defineEmits<Emits>();
           </CardContent>
         </Card>
       </div>
+      <Button
+        class="hidden md:block"
+        variant="outline"
+        :disabled="
+          quizStore.questions && quizStore.stepActiveIndex === quizStore.questions.length - 1
+        "
+        @click="quizStore.quizState.question++"
+        >Next</Button
+      >
+    </div>
+
+    <div class="flex gap-16 md:hidden">
+      <Button
+        variant="outline"
+        :disabled="quizStore.stepActiveIndex === 0"
+        @click="quizStore.quizState.question--"
+        >Prev</Button
+      >
       <Button
         variant="outline"
         :disabled="
