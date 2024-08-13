@@ -11,6 +11,8 @@ export const useResultStore = defineStore('results', {
   }),
 
   getters: {
+    // this is terrible and disgusting part of code with unefficient time complexity
+    // made ASAP, to be rewrite later
     resultsForChart: (state) => {
       return [
         {

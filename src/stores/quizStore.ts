@@ -47,8 +47,7 @@ export const useQuizStore = defineStore('quiz', {
     },
     unansweredQuestions: (state) => {
       if (!state.questions) return 0;
-      return state.questions.filter((question, index) => typeof state.answers[index] !== 'string')
-        .length;
+      return state.questions.filter((_, index) => typeof state.answers[index] !== 'string').length;
     },
     timeMultiplier: (state) => {
       if (state.quizState.effectiveTime > 180) return 1;

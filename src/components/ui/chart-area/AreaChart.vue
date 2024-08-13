@@ -114,7 +114,7 @@ function handleLegendItemClick(d: BulletLegendItemInterface, i: number) {
 
       <template v-for="(category, i) in categories" :key="category">
         <VisArea
-          :x="(i: number) => i"
+          :x="(_: Data, i: number) => i"
           :y="(d: Data) => d[category]"
           color="auto"
           :curve-type="curveType"
@@ -131,7 +131,7 @@ function handleLegendItemClick(d: BulletLegendItemInterface, i: number) {
 
       <template v-for="(category, i) in categories" :key="category">
         <VisLine
-          :x="( i: number) => i"
+          :x="(_: Data, i: number) => i"
           :y="(d: Data) => d[category]"
           :color="colors[i]"
           :curve-type="curveType"
